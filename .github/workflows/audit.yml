@@ -1,0 +1,26 @@
+# Every push is proven on a real macOS runner: style, audit, and an actual
+# install — the install is the check that matters, because it downloads the
+# dmg and verifies the sha256, so a bad bump cannot sit here silently.
+name: Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Link this checkout in as the tap
+        run: |
+          TAP_DIR="$(brew --repository)/Library/Taps/emilmsh/homebrew-tap"
+          mkdir -p "$(dirname "$TAP_DIR")"
+          ln -s "$GITHUB_WORKSPACE" "$TAP_DIR"
+      - run: brew style emilmsh/tap
+      - run: brew audit --cask emilmsh/tap/pdf-scholar
+      - name: Install (verifies download + sha256)
+        run: brew install --cask --no-quarantine emilmsh/tap/pdf-scholar
+      - name: The app actually landed
+        run: test -d "/Applications/PDF Scholar.app"
