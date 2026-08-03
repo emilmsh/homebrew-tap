@@ -15,7 +15,15 @@ cask "pdf-scholar" do
     strategy :github_latest
   end
 
+  depends_on macos: ">= :big_sur"
+
   app "PDF Scholar.app"
+
+  zap trash: [
+    "~/Library/Application Support/PDF Scholar",
+    "~/Library/Preferences/no.emil.pdfx.plist",
+    "~/Library/Saved Application State/no.emil.pdfx.savedState",
+  ]
 
   # The macOS build is unsigned (a deliberate zero-cost decision — see
   # docs/PLATFORMS.md in the main repo), which has two consequences the
@@ -32,10 +40,4 @@ cask "pdf-scholar" do
 
       brew upgrade --cask pdf-scholar
   EOS
-
-  zap trash: [
-    "~/Library/Application Support/PDF Scholar",
-    "~/Library/Preferences/no.emil.pdfx.plist",
-    "~/Library/Saved Application State/no.emil.pdfx.savedState",
-  ]
 end
