@@ -27,12 +27,13 @@ cask "pdf-scholar" do
 
   # The macOS build is unsigned (a deliberate zero-cost decision — see
   # docs/PLATFORMS.md in the main repo), which has two consequences the
-  # caveats explain: Gatekeeper friction unless installed --no-quarantine,
-  # and no auto-update, so brew upgrade IS the update channel.
+  # caveats explain: Gatekeeper quarantine (Homebrew >= 5 no longer offers
+  # --no-quarantine), and no auto-update, so brew upgrade IS the update
+  # channel.
   caveats <<~EOS
-    PDF Scholar's macOS build is unsigned. If it was installed without
-    --no-quarantine and macOS reports the app as damaged on first launch,
-    clear the quarantine flag:
+    PDF Scholar's macOS build is unsigned, so macOS quarantines it on
+    every install and upgrade. If Gatekeeper reports the app as damaged
+    when it first opens, clear the flag:
 
       xattr -cr "/Applications/PDF Scholar.app"
 

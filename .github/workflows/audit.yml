@@ -18,9 +18,11 @@ jobs:
           TAP_DIR="$(brew --repository)/Library/Taps/emilmsh/homebrew-tap"
           mkdir -p "$(dirname "$TAP_DIR")"
           ln -s "$GITHUB_WORKSPACE" "$TAP_DIR"
+      # Homebrew 6 requires third-party taps to be trusted before use.
+      - run: brew trust emilmsh/tap
       - run: brew style emilmsh/tap
       - run: brew audit --cask emilmsh/tap/pdf-scholar
       - name: Install (verifies download + sha256)
-        run: brew install --cask --no-quarantine emilmsh/tap/pdf-scholar
+        run: brew install --cask emilmsh/tap/pdf-scholar
       - name: The app actually landed
         run: test -d "/Applications/PDF Scholar.app"
