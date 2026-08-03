@@ -10,11 +10,6 @@ brew install --cask emilmsh/tap/pdf-scholar
 xattr -cr "/Applications/PDF Scholar.app"
 ```
 
-The `xattr` line is needed because the macOS build is unsigned (a deliberate
-zero-cost decision — [why](https://github.com/emilmsh/pdf-scholar/blob/master/docs/PLATFORMS.md))
-and Homebrew ≥ 5 no longer offers `--no-quarantine`: without it, Gatekeeper
-reports the app as damaged on first launch.
-
 ## Update
 
 ```sh
@@ -22,9 +17,12 @@ brew upgrade --cask pdf-scholar
 xattr -cr "/Applications/PDF Scholar.app"
 ```
 
-Unsigned apps cannot auto-update, so this is the update channel on macOS.
-Each upgrade is a fresh download, so the quarantine flag comes back with it —
-hence the second line again.
+The `xattr` line is the same in both: the macOS build is unsigned (a
+deliberate zero-cost decision —
+[why](https://github.com/emilmsh/pdf-scholar/blob/master/docs/PLATFORMS.md)),
+every install or upgrade is a fresh quarantined download, and without the
+command Gatekeeper reports the app as damaged. Unsigned apps cannot
+auto-update, so `brew upgrade` is the update channel on macOS.
 
 ## Maintenance
 
