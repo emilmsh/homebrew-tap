@@ -1,9 +1,9 @@
 cask "pdf-scholar" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.55.0"
-  sha256 arm:   "aa85f44cd313bfef65a4aac3b9225b8732451fecc082fa4246272daeeacbbe48",
-         intel: "87a4929712e19f1235b9f1cb116b6acbd9306c40f5b8abcdb0c458ae7b2551cf"
+  version "0.55.1"
+  sha256 arm:   "82f6b72821942775d3c598de35945d131286b59e9ca42346d3226f63564ccc1b",
+         intel: "6db2751105882776faea12b2a587cb8049e3bea018dfb06ead2455065f2736a5"
 
   url "https://github.com/emilmsh/pdf-scholar/releases/download/v#{version}/PDF-Scholar-#{version}-#{arch}.dmg"
   name "PDF Scholar"
