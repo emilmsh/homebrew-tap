@@ -12,7 +12,7 @@ jobs:
   audit:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Link this checkout in as the tap
         run: |
           TAP_DIR="$(brew --repository)/Library/Taps/emilmsh/homebrew-tap"
