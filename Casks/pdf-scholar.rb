@@ -15,7 +15,10 @@ cask "pdf-scholar" do
     strategy :github_latest
   end
 
-  depends_on macos: :big_sur
+  # No `depends_on macos:` stanza: Homebrew itself no longer runs on anything
+  # older than the floor this app needs, and `brew style` (Homebrew/OSDependsOn,
+  # since 2026-10) fails the audit on a redundant minimum — which failed every
+  # bump since 0.67.0 and mailed Emil each time.
 
   app "PDF Scholar.app"
 
